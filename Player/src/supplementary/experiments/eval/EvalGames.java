@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.rng.RandomProviderState;
@@ -56,41 +57,59 @@ public class EvalGames
 		final String AIName, final boolean useDBGames
 	)
 	{
-		final List<Metric> metrics = new Evaluation().conceptMetrics();
+				
+		//dialogMetrics
+		//final List<Metric> metrics = new Evaluation().conceptMetrics();
+		final List<Metric> metrics = new Evaluation().dialogMetrics();
 		final ArrayList<Double> weights = new ArrayList<>();
 		for (int i = 0; i < metrics.size(); i++)
 			weights.add(Double.valueOf(1));
 		
 		String outputString = "GameName,";
+		outputString += "agent" + ",";
 		for (int m = 0; m < metrics.size(); m++)
 		{
 			outputString += metrics.get(m).name() + ",";
 		}
 		outputString = outputString.substring(0, outputString.length()-1) + "\n";
 		
-		final String[] choices = FileHandling.listGames();
+		//final String[] choices = FileHandling.listGames();
+		String[] choices = {"/lud/board/space/connection/Hex.lud",
+							"/lud/math/hand/Rock-Paper-Scissors.lud"};
+		
+		String[] agents = {"Random", "MC-GRAVE", "Ludii AI", "UCT"};
+		List<String> optionalRules = Arrays.asList("Swap Rules/Off", "Board Size/3x3");
 		for (final String s : choices)
 		{
 			if (!FileHandling.shouldIgnoreLudEvaluation(s))
 			{
 				System.out.println("\n" + s);
+				
 				final String gameName = s.split("\\/")[s.split("\\/").length-1];
 				final Game tempGame = GameLoader.loadGameFromName(gameName);
 				final List<Ruleset> rulesets = tempGame.description().rulesets();
-				
+				List<String> options = tempGame.getOptions();
+						
 				if (tempGame.hasSubgames()) // TODO, we don't currently support matches
 					continue;
-				
-				if (rulesets != null && !rulesets.isEmpty())
+				for (final String a : agents)
 				{
-					// Record ludemeplexes for each ruleset
-					for (int rs = 0; rs < rulesets.size(); rs++)
-						if (!rulesets.get(rs).optionSettings().isEmpty())
-							outputString += evaluateGame(report, tempGame.name(), rulesets.get(rs).optionSettings(), AIName, numberTrials, thinkTime, maxTurns, metrics, weights, useDBGames);
-				}
-				else
-				{
-					outputString += evaluateGame(report, tempGame.name(), tempGame.description().gameOptions().allOptionStrings(tempGame.getOptions()), AIName, numberTrials, thinkTime, maxTurns, metrics, weights, useDBGames);
+					if (rulesets != null && !rulesets.isEmpty())
+					{
+						// Record ludemeplexes for each ruleset
+						for (int rs = 0; rs < rulesets.size(); rs++)
+							if (!rulesets.get(rs).optionSettings().isEmpty())
+								//outputString += evaluateGame(report, tempGame.name(), rulesets.get(rs).optionSettings(), AIName, numberTrials, thinkTime, maxTurns, metrics, weights, useDBGames);
+								outputString += evaluateGame(report, tempGame.name(), rulesets.get(rs).optionSettings(), a, numberTrials, thinkTime, maxTurns, metrics, weights, useDBGames);
+						
+					}
+					else
+					{
+						//outputString += evaluateGame(report, tempGame.name(), tempGame.description().gameOptions().allOptionStrings(tempGame.getOptions()), AIName, numberTrials, thinkTime, maxTurns, metrics, weights, useDBGames);
+						//outputString += evaluateGame(report, tempGame.name(), tempGame.description().gameOptions().allOptionStrings(tempGame.getOptions()), a, numberTrials, thinkTime, maxTurns, metrics, weights, useDBGames);
+						outputString += evaluateGame(report, tempGame.name(), tempGame.description().gameOptions().allOptionStrings(optionalRules), a, numberTrials, thinkTime, maxTurns, metrics, weights, useDBGames);
+
+					}
 				}
 			}
 		}
@@ -353,6 +372,7 @@ public class EvalGames
 		double finalScore = 0.0;
 		
 		String csvOutputString = DBGameInfo.getUniqueName(game) + ",";
+		csvOutputString += aiPlayers.get(0).friendlyName() + ",";
 		
 		final Trial[] trials = allStoredTrials.toArray(new Trial[allStoredTrials.size()]);
 		final RandomProviderState[] randomProviderStates = allStoredRNG.toArray(new RandomProviderState[allStoredRNG.size()]);
@@ -413,13 +433,13 @@ public class EvalGames
 		argParse.addOption(new ArgOption()
 				.withNames("--numTrials")
 				.help("Number of trials to run for each game.")
-				.withDefault(Integer.valueOf(10))
+				.withDefault(Integer.valueOf(1000))
 				.withNumVals(1)
 				.withType(OptionTypes.Int));
 		argParse.addOption(new ArgOption()
 				.withNames("--maxTurns")
 				.help("Turn limit.")
-				.withDefault(Integer.valueOf(50))
+				.withDefault(Integer.valueOf(500000))
 				.withNumVals(1)
 				.withType(OptionTypes.Int));
 		argParse.addOption(new ArgOption()
