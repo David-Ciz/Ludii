@@ -242,11 +242,11 @@ public class GameOptions
 			strings.add(activeOptionStr);
 		}
 		
-		for (int i = 0; i < usedOptionStrings.length; ++i)
-		{
-			if (!usedOptionStrings[i])
-				throw new UnusedOptionException(selectedOptionStrings.get(i));
-		}
+		//for (int i = 0; i < usedOptionStrings.length; ++i)
+		//{
+		//	if (!usedOptionStrings[i])
+				//throw new UnusedOptionException(selectedOptionStrings.get(i));
+		//}
 		
 		return strings;
 	}

@@ -32,7 +32,7 @@ public final class Constants
 	public static final int MAX_NUM_ITERATION = 10000;
 
 	/** Maximum number of players. */
-	public static final int MAX_PLAYERS = 16;
+	public static final int MAX_PLAYERS = 2;
 
 	/** Maximum number of consecutive player turns (for purposes of hash codes, not a strict limit). */
 	public static final int MAX_CONSECUTIVES_TURNS = 16;

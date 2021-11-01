@@ -17,24 +17,24 @@ EXAMPLE: (equipment { (board (square 3)) (piece "Disc" P1) (piece "Cross" P2) })
 REMARKS: To define the items (container, component etc.) of the game. Any type of component or container described in this chapter may be used as an <item> type.
 TYPE: game.equipment.Item
 TYPE JAVADOC: Provides a Grammar placeholder for items to go in the equipment collection.
-SUBCLASS: game.equipment.component.Card
-SUBCLASS: game.equipment.component.Component
-SUBCLASS: game.equipment.component.Die
-SUBCLASS: game.equipment.component.Piece
-SUBCLASS: game.equipment.component.tile.Domino
-SUBCLASS: game.equipment.component.tile.Tile
 SUBCLASS: game.equipment.container.board.Board
 SUBCLASS: game.equipment.container.board.Boardless
-SUBCLASS: game.equipment.container.board.custom.MancalaBoard
 SUBCLASS: game.equipment.container.board.custom.SurakartaBoard
+SUBCLASS: game.equipment.container.board.custom.MancalaBoard
 SUBCLASS: game.equipment.container.Container
+SUBCLASS: game.equipment.container.other.Hand
 SUBCLASS: game.equipment.container.other.Deck
 SUBCLASS: game.equipment.container.other.Dice
-SUBCLASS: game.equipment.container.other.Hand
-SUBCLASS: game.equipment.other.Dominoes
 SUBCLASS: game.equipment.other.Hints
 SUBCLASS: game.equipment.other.Map
+SUBCLASS: game.equipment.other.Dominoes
 SUBCLASS: game.equipment.other.Regions
+SUBCLASS: game.equipment.component.Component
+SUBCLASS: game.equipment.component.Die
+SUBCLASS: game.equipment.component.Card
+SUBCLASS: game.equipment.component.tile.Tile
+SUBCLASS: game.equipment.component.tile.Domino
+SUBCLASS: game.equipment.component.Piece
 TYPE: game.equipment.component.Card
 TYPE JAVADOC: Defines a card with specific properties such as the suit or the rank of the  card in the deck.
 NEW CTOR
@@ -126,11 +126,11 @@ TYPE: game.equipment.container.Container
 TYPE JAVADOC: Defines a container.
 SUBCLASS: game.equipment.container.board.Board
 SUBCLASS: game.equipment.container.board.Boardless
-SUBCLASS: game.equipment.container.board.custom.MancalaBoard
 SUBCLASS: game.equipment.container.board.custom.SurakartaBoard
+SUBCLASS: game.equipment.container.board.custom.MancalaBoard
+SUBCLASS: game.equipment.container.other.Hand
 SUBCLASS: game.equipment.container.other.Deck
 SUBCLASS: game.equipment.container.other.Dice
-SUBCLASS: game.equipment.container.other.Hand
 TYPE: game.equipment.container.board.Board
 TYPE JAVADOC: Defines a board by its graph, consisting of vertex locations and edge pairs.
 NEW CTOR
@@ -691,13 +691,13 @@ NEW CTOR
 EXAMPLE: (was Pass)
 TYPE: game.functions.dim.BaseDimFunction
 TYPE JAVADOC: Common functionality for DimFunction - override where necessary.
-SUBCLASS: game.functions.dim.math.Abs
-SUBCLASS: game.functions.dim.math.Add
-SUBCLASS: game.functions.dim.math.Div
-SUBCLASS: game.functions.dim.math.Max
-SUBCLASS: game.functions.dim.math.Min
-SUBCLASS: game.functions.dim.math.Mul
 SUBCLASS: game.functions.dim.math.Pow
+SUBCLASS: game.functions.dim.math.Add
+SUBCLASS: game.functions.dim.math.Max
+SUBCLASS: game.functions.dim.math.Mul
+SUBCLASS: game.functions.dim.math.Div
+SUBCLASS: game.functions.dim.math.Abs
+SUBCLASS: game.functions.dim.math.Min
 SUBCLASS: game.functions.dim.math.Sub
 TYPE: game.functions.dim.math.Abs
 TYPE JAVADOC: Return the absolute value of a dim.
@@ -933,17 +933,17 @@ PARAM JAVADOC: <floatFunction>: The value.
 EXAMPLE: (tan 5.5)
 TYPE: game.functions.graph.generators.basis.Basis
 TYPE JAVADOC: Defines known basis types (i.e. tilings) for board graphs.
-SUBCLASS: game.functions.graph.generators.basis.brick.Brick
-SUBCLASS: game.functions.graph.generators.basis.celtic.Celtic
-SUBCLASS: game.functions.graph.generators.basis.hex.Hex
-SUBCLASS: game.functions.graph.generators.basis.quadhex.Quadhex
-SUBCLASS: game.functions.graph.generators.basis.square.Square
-SUBCLASS: game.functions.graph.generators.basis.tiling.Tiling
-SUBCLASS: game.functions.graph.generators.basis.tri.Tri
-SUBCLASS: game.functions.graph.generators.shape.concentric.Concentric
 SUBCLASS: game.functions.graph.generators.shape.Rectangle
+SUBCLASS: game.functions.graph.generators.shape.concentric.Concentric
 SUBCLASS: game.functions.graph.generators.shape.Spiral
 SUBCLASS: game.functions.graph.generators.shape.Wedge
+SUBCLASS: game.functions.graph.generators.basis.celtic.Celtic
+SUBCLASS: game.functions.graph.generators.basis.quadhex.Quadhex
+SUBCLASS: game.functions.graph.generators.basis.tri.Tri
+SUBCLASS: game.functions.graph.generators.basis.tiling.Tiling
+SUBCLASS: game.functions.graph.generators.basis.hex.Hex
+SUBCLASS: game.functions.graph.generators.basis.square.Square
+SUBCLASS: game.functions.graph.generators.basis.brick.Brick
 TYPE: game.functions.graph.generators.basis.brick.Brick
 TYPE JAVADOC: Defines a board on a brick tiling using 1x2 rectangular brick tiles.
 NEW CTOR
@@ -2581,8 +2581,8 @@ PARAM JAVADOC: {<endRule>}: The ending rules.
 EXAMPLE: (end (if (no Moves Next) (result Mover Win) ) )
 TYPE: game.rules.end.EndRule
 TYPE JAVADOC: Declares a generic end rule.
-SUBCLASS: game.rules.end.ForEach
 SUBCLASS: game.rules.end.If
+SUBCLASS: game.rules.end.ForEach
 TYPE: game.rules.end.ForEach
 TYPE JAVADOC: Applies the end condition to each player of a certain type.
 NEW CTOR
@@ -2633,12 +2633,12 @@ PARAM JAVADOC: <metaRule>: A single metarule.
 EXAMPLE: (meta (swap))
 TYPE: game.rules.meta.MetaRule
 TYPE JAVADOC: Metarule defined before play that supercedes all other rules.
-SUBCLASS: game.rules.meta.Automove
-SUBCLASS: game.rules.meta.Gravity
-SUBCLASS: game.rules.meta.NoRepeat
-SUBCLASS: game.rules.meta.PassEnd
 SUBCLASS: game.rules.meta.Pin
+SUBCLASS: game.rules.meta.Gravity
+SUBCLASS: game.rules.meta.PassEnd
+SUBCLASS: game.rules.meta.Automove
 SUBCLASS: game.rules.meta.Swap
+SUBCLASS: game.rules.meta.NoRepeat
 TYPE: game.rules.meta.NoRepeat
 TYPE JAVADOC: Specifies a particular type of repetition that is forbidden in the game.
 NEW CTOR
@@ -2693,62 +2693,62 @@ PARAM JAVADOC: <moves>: The legal moves of the playing rules.
 EXAMPLE: (play (forEach Piece))
 TYPE: game.rules.play.moves.Moves
 TYPE JAVADOC: Returns a moves collection.
-SUBCLASS: game.rules.play.moves.decision.Decision
-SUBCLASS: game.rules.play.moves.decision.Move
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Add
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Apply
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Attract
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Bet
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Claim
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Custodial
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Deal
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Directional
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Effect
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Enclose
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Flip
-SUBCLASS: game.rules.play.moves.nonDecision.effect.FromTo
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Hop
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Intervene
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Leap
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Note
+SUBCLASS: game.rules.play.moves.nonDecision.NonDecision
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Pass
-SUBCLASS: game.rules.play.moves.nonDecision.effect.PlayCard
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Promote
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Propose
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Push
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Random
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Slide
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Leap
+SUBCLASS: game.rules.play.moves.nonDecision.effect.set.Set
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Remove
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.AvoidStoredState
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.Do
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.FirstMoveOnTrack
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.max.Max
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.Priority
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.While
+SUBCLASS: game.rules.play.moves.nonDecision.effect.take.Take
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Add
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Propose
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Apply
+SUBCLASS: game.rules.play.moves.nonDecision.effect.PlayCard
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Intervene
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Effect
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Vote
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Flip
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Shoot
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Surround
+SUBCLASS: game.rules.play.moves.nonDecision.effect.FromTo
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Step
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Select
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Directional
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Bet
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Push
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Note
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Attract
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.AddScore
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.remember.Remember
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.MoveAgain
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.swap.Swap
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.forget.Forget
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Roll
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Satisfy
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Select
-SUBCLASS: game.rules.play.moves.nonDecision.effect.set.Set
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Shoot
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Slide
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Custodial
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Claim
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.AvoidStoredState
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.While
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.Priority
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.FirstMoveOnTrack
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.max.Max
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.Do
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Sow
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.AddScore
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.forget.Forget
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.MoveAgain
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.remember.Remember
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.swap.Swap
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Step
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Surround
-SUBCLASS: game.rules.play.moves.nonDecision.effect.take.Take
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Hop
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Promote
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Enclose
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Random
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Trigger
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Vote
-SUBCLASS: game.rules.play.moves.nonDecision.NonDecision
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Deal
 SUBCLASS: game.rules.play.moves.nonDecision.operator.Operator
 SUBCLASS: game.rules.play.moves.nonDecision.operators.foreach.ForEach
-SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.AllCombinations
 SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.And
+SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.Or
+SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.AllCombinations
 SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.Append
 SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.If
-SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.Or
+SUBCLASS: game.rules.play.moves.decision.Move
+SUBCLASS: game.rules.play.moves.decision.Decision
 TYPE: game.rules.play.moves.decision.Decision
 TYPE JAVADOC: Defines moves that involve a decision by the player.
 SUBCLASS: game.rules.play.moves.decision.Move
@@ -2923,57 +2923,57 @@ CONST JAVADOC: Add: Makes a add move.
 CONST JAVADOC: Claim: Makes a claim move.
 TYPE: game.rules.play.moves.nonDecision.NonDecision
 TYPE JAVADOC: Defines moves that do not involve an immediate decision by the player.
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Add
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Attract
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Bet
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Claim
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Custodial
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Deal
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Directional
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Effect
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Enclose
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Flip
-SUBCLASS: game.rules.play.moves.nonDecision.effect.FromTo
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Hop
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Intervene
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Leap
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Note
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Pass
-SUBCLASS: game.rules.play.moves.nonDecision.effect.PlayCard
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Promote
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Propose
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Push
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Slide
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Leap
+SUBCLASS: game.rules.play.moves.nonDecision.effect.set.Set
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Remove
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.AvoidStoredState
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.Do
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.FirstMoveOnTrack
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.max.Max
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.Priority
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.While
+SUBCLASS: game.rules.play.moves.nonDecision.effect.take.Take
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Add
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Propose
+SUBCLASS: game.rules.play.moves.nonDecision.effect.PlayCard
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Intervene
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Effect
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Vote
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Flip
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Shoot
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Surround
+SUBCLASS: game.rules.play.moves.nonDecision.effect.FromTo
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Step
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Select
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Directional
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Bet
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Push
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Note
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Attract
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.AddScore
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.remember.Remember
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.MoveAgain
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.swap.Swap
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.forget.Forget
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Roll
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Satisfy
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Select
-SUBCLASS: game.rules.play.moves.nonDecision.effect.set.Set
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Shoot
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Slide
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Custodial
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Claim
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.AvoidStoredState
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.While
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.Priority
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.FirstMoveOnTrack
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.max.Max
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.Do
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Sow
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.AddScore
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.forget.Forget
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.MoveAgain
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.remember.Remember
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.swap.Swap
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Step
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Surround
-SUBCLASS: game.rules.play.moves.nonDecision.effect.take.Take
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Hop
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Promote
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Enclose
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Trigger
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Vote
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Deal
 SUBCLASS: game.rules.play.moves.nonDecision.operator.Operator
 SUBCLASS: game.rules.play.moves.nonDecision.operators.foreach.ForEach
-SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.AllCombinations
 SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.And
+SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.Or
+SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.AllCombinations
 SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.Append
 SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.If
-SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.Or
 REMARKS: Non-decision moves include move operators that might combine further decision moves.
 TYPE: game.rules.play.moves.nonDecision.effect.Add
 TYPE JAVADOC: Places one or more component(s) at a collection of sites or at one specific  site.
@@ -3062,49 +3062,49 @@ EXAMPLE: (directional (from (last To)) (to if:(is Enemy (who at:(to))) (apply (r
 REMARKS: For example, used in Fanorona.
 TYPE: game.rules.play.moves.nonDecision.effect.Effect
 TYPE JAVADOC: Defines moves which do not involve a player decision.
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Add
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Attract
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Bet
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Claim
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Custodial
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Deal
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Directional
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Enclose
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Flip
-SUBCLASS: game.rules.play.moves.nonDecision.effect.FromTo
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Hop
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Intervene
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Leap
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Note
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Pass
-SUBCLASS: game.rules.play.moves.nonDecision.effect.PlayCard
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Promote
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Propose
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Push
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Slide
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Leap
+SUBCLASS: game.rules.play.moves.nonDecision.effect.set.Set
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Remove
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.AvoidStoredState
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.Do
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.FirstMoveOnTrack
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.max.Max
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.Priority
-SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.While
+SUBCLASS: game.rules.play.moves.nonDecision.effect.take.Take
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Add
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Propose
+SUBCLASS: game.rules.play.moves.nonDecision.effect.PlayCard
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Intervene
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Vote
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Flip
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Shoot
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Surround
+SUBCLASS: game.rules.play.moves.nonDecision.effect.FromTo
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Step
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Select
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Directional
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Bet
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Push
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Note
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Attract
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.AddScore
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.remember.Remember
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.MoveAgain
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.swap.Swap
+SUBCLASS: game.rules.play.moves.nonDecision.effect.state.forget.Forget
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Roll
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Satisfy
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Select
-SUBCLASS: game.rules.play.moves.nonDecision.effect.set.Set
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Shoot
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Slide
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Custodial
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Claim
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.AvoidStoredState
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.While
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.Priority
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.FirstMoveOnTrack
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.max.Max
+SUBCLASS: game.rules.play.moves.nonDecision.effect.requirement.Do
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Sow
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.AddScore
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.forget.Forget
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.MoveAgain
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.remember.Remember
-SUBCLASS: game.rules.play.moves.nonDecision.effect.state.swap.Swap
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Step
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Surround
-SUBCLASS: game.rules.play.moves.nonDecision.effect.take.Take
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Hop
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Promote
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Enclose
 SUBCLASS: game.rules.play.moves.nonDecision.effect.Trigger
-SUBCLASS: game.rules.play.moves.nonDecision.effect.Vote
+SUBCLASS: game.rules.play.moves.nonDecision.effect.Deal
 SUBCLASS: game.rules.play.moves.nonDecision.operators.foreach.ForEach
 TYPE: game.rules.play.moves.nonDecision.effect.Enclose
 TYPE JAVADOC: Applies a move to an enclosed group.
@@ -3636,11 +3636,11 @@ PARAM JAVADOC: [<then>]: The moves applied after that move is applied.
 EXAMPLE: (take Control of:P1 by:Mover)
 TYPE: game.rules.play.moves.nonDecision.operator.Operator
 TYPE JAVADOC: Defines operations that combine lists of moves, then optionally perform some additional effects.
-SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.AllCombinations
 SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.And
+SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.Or
+SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.AllCombinations
 SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.Append
 SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.If
-SUBCLASS: game.rules.play.moves.nonDecision.operators.logical.Or
 TYPE: game.rules.play.moves.nonDecision.operators.foreach.ForEach
 TYPE JAVADOC: Iterates over a set of items.
 NEW CTOR
@@ -3795,12 +3795,12 @@ EXAMPLE: (start { (place "Pawn1" {"F4" "F5" "F6" "F7" "F8" "F9" "G5" "G6" "G7" "
 REMARKS: For any game with starting rules, like pieces already placed on the board.
 TYPE: game.rules.start.StartRule
 TYPE JAVADOC: Sets the initial setup rule for the start of each trial (i.e. game).
-SUBCLASS: game.rules.start.Deal
 SUBCLASS: game.rules.start.deductionPuzzle.Set
-SUBCLASS: game.rules.start.forEach.ForEach
-SUBCLASS: game.rules.start.place.Place
 SUBCLASS: game.rules.start.set.Set
+SUBCLASS: game.rules.start.place.Place
 SUBCLASS: game.rules.start.split.Split
+SUBCLASS: game.rules.start.forEach.ForEach
+SUBCLASS: game.rules.start.Deal
 TYPE: game.rules.start.deductionPuzzle.Set
 TYPE JAVADOC: Sets a variable to a specified value in a deduction puzzle.
 NEW CTOR
@@ -4287,47 +4287,47 @@ CONST JAVADOC: NW: North-West.
 CONST JAVADOC: NNW: North-North-West.
 TYPE: game.util.directions.DirectionFacing
 TYPE JAVADOC: Provides a general ``direction'' description for use in a variety of  contexts.
-SUBCLASS: game.util.directions.CompassDirection$1
 SUBCLASS: game.util.directions.CompassDirection$10
-SUBCLASS: game.util.directions.CompassDirection$11
-SUBCLASS: game.util.directions.CompassDirection$12
-SUBCLASS: game.util.directions.CompassDirection$13
-SUBCLASS: game.util.directions.CompassDirection$14
-SUBCLASS: game.util.directions.CompassDirection$15
-SUBCLASS: game.util.directions.CompassDirection$16
+SUBCLASS: game.util.directions.SpatialDirection$10
+SUBCLASS: game.util.directions.SpatialDirection$16
 SUBCLASS: game.util.directions.CompassDirection$2
-SUBCLASS: game.util.directions.CompassDirection$3
-SUBCLASS: game.util.directions.CompassDirection$4
-SUBCLASS: game.util.directions.CompassDirection$5
-SUBCLASS: game.util.directions.CompassDirection$6
-SUBCLASS: game.util.directions.CompassDirection$7
-SUBCLASS: game.util.directions.CompassDirection$8
 SUBCLASS: game.util.directions.CompassDirection$9
-SUBCLASS: game.util.directions.CompassDirection
-SUBCLASS: game.util.directions.RotationalDirection$1
-SUBCLASS: game.util.directions.RotationalDirection$2
-SUBCLASS: game.util.directions.RotationalDirection$3
-SUBCLASS: game.util.directions.RotationalDirection$4
 SUBCLASS: game.util.directions.RotationalDirection
 SUBCLASS: game.util.directions.SpatialDirection$1
-SUBCLASS: game.util.directions.SpatialDirection$10
-SUBCLASS: game.util.directions.SpatialDirection$11
-SUBCLASS: game.util.directions.SpatialDirection$12
-SUBCLASS: game.util.directions.SpatialDirection$13
-SUBCLASS: game.util.directions.SpatialDirection$14
-SUBCLASS: game.util.directions.SpatialDirection$15
-SUBCLASS: game.util.directions.SpatialDirection$16
-SUBCLASS: game.util.directions.SpatialDirection$17
-SUBCLASS: game.util.directions.SpatialDirection$18
-SUBCLASS: game.util.directions.SpatialDirection$2
-SUBCLASS: game.util.directions.SpatialDirection$3
-SUBCLASS: game.util.directions.SpatialDirection$4
-SUBCLASS: game.util.directions.SpatialDirection$5
-SUBCLASS: game.util.directions.SpatialDirection$6
-SUBCLASS: game.util.directions.SpatialDirection$7
-SUBCLASS: game.util.directions.SpatialDirection$8
-SUBCLASS: game.util.directions.SpatialDirection$9
+SUBCLASS: game.util.directions.RotationalDirection$3
+SUBCLASS: game.util.directions.CompassDirection$3
+SUBCLASS: game.util.directions.RotationalDirection$2
+SUBCLASS: game.util.directions.CompassDirection$7
 SUBCLASS: game.util.directions.SpatialDirection
+SUBCLASS: game.util.directions.SpatialDirection$7
+SUBCLASS: game.util.directions.SpatialDirection$17
+SUBCLASS: game.util.directions.SpatialDirection$2
+SUBCLASS: game.util.directions.SpatialDirection$5
+SUBCLASS: game.util.directions.SpatialDirection$11
+SUBCLASS: game.util.directions.CompassDirection$12
+SUBCLASS: game.util.directions.SpatialDirection$6
+SUBCLASS: game.util.directions.CompassDirection
+SUBCLASS: game.util.directions.SpatialDirection$3
+SUBCLASS: game.util.directions.CompassDirection$5
+SUBCLASS: game.util.directions.RotationalDirection$4
+SUBCLASS: game.util.directions.SpatialDirection$13
+SUBCLASS: game.util.directions.SpatialDirection$8
+SUBCLASS: game.util.directions.CompassDirection$6
+SUBCLASS: game.util.directions.SpatialDirection$18
+SUBCLASS: game.util.directions.CompassDirection$1
+SUBCLASS: game.util.directions.CompassDirection$8
+SUBCLASS: game.util.directions.SpatialDirection$12
+SUBCLASS: game.util.directions.CompassDirection$4
+SUBCLASS: game.util.directions.SpatialDirection$15
+SUBCLASS: game.util.directions.RotationalDirection$1
+SUBCLASS: game.util.directions.CompassDirection$11
+SUBCLASS: game.util.directions.CompassDirection$13
+SUBCLASS: game.util.directions.SpatialDirection$14
+SUBCLASS: game.util.directions.CompassDirection$15
+SUBCLASS: game.util.directions.CompassDirection$16
+SUBCLASS: game.util.directions.SpatialDirection$9
+SUBCLASS: game.util.directions.SpatialDirection$4
+SUBCLASS: game.util.directions.CompassDirection$14
 TYPE: game.util.directions.RelativeDirection
 TYPE JAVADOC: Describes categories of relative directions.
 CONST JAVADOC: Forward: Forward (only) direction.
@@ -4539,106 +4539,106 @@ PARAM JAVADOC: [<ai>]: Metadata for AIs playing this game.
 EXAMPLE: (metadata (info { (description "Description of The game") (source "Source of the game") (version "1.0.0") (classification "board/space/territory") (origin "Origin of the game.") }) (graphics { (board Style Go) (player Colour P1 (colour Black)) (player Colour P2 (colour White)) }) (ai (bestAgent "UCT")) )
 TYPE: metadata.MetadataItem
 TYPE JAVADOC: Interface for generic metadata item.  Classes to be included as metadata should inherit form this.
-SUBCLASS: metadata.ai.Ai
 SUBCLASS: metadata.ai.AIItem
-SUBCLASS: metadata.ai.features.Features
+SUBCLASS: metadata.ai.Ai
 SUBCLASS: metadata.ai.features.FeatureSet
-SUBCLASS: metadata.ai.heuristics.Heuristics
-SUBCLASS: metadata.ai.heuristics.terms.CentreProximity
-SUBCLASS: metadata.ai.heuristics.terms.ComponentValues
-SUBCLASS: metadata.ai.heuristics.terms.CornerProximity
-SUBCLASS: metadata.ai.heuristics.terms.CurrentMoverHeuristic
-SUBCLASS: metadata.ai.heuristics.terms.HeuristicTerm
-SUBCLASS: metadata.ai.heuristics.terms.Influence
-SUBCLASS: metadata.ai.heuristics.terms.LineCompletionHeuristic
-SUBCLASS: metadata.ai.heuristics.terms.Material
-SUBCLASS: metadata.ai.heuristics.terms.MobilitySimple
-SUBCLASS: metadata.ai.heuristics.terms.NullHeuristic
-SUBCLASS: metadata.ai.heuristics.terms.OwnRegionsCount
-SUBCLASS: metadata.ai.heuristics.terms.PlayerRegionsProximity
-SUBCLASS: metadata.ai.heuristics.terms.PlayerSiteMapCount
-SUBCLASS: metadata.ai.heuristics.terms.RegionProximity
-SUBCLASS: metadata.ai.heuristics.terms.Score
-SUBCLASS: metadata.ai.heuristics.terms.SidesProximity
+SUBCLASS: metadata.ai.features.Features
+SUBCLASS: metadata.ai.misc.Pair
+SUBCLASS: metadata.ai.misc.BestAgent
 SUBCLASS: metadata.ai.heuristics.transformations.DivNumBoardSites
 SUBCLASS: metadata.ai.heuristics.transformations.DivNumInitPlacement
-SUBCLASS: metadata.ai.heuristics.transformations.HeuristicTransformation
 SUBCLASS: metadata.ai.heuristics.transformations.LogisticFunction
 SUBCLASS: metadata.ai.heuristics.transformations.Tanh
-SUBCLASS: metadata.ai.misc.BestAgent
-SUBCLASS: metadata.ai.misc.Pair
-SUBCLASS: metadata.graphics.board.Board
-SUBCLASS: metadata.graphics.GraphicsItem
-SUBCLASS: metadata.graphics.hand.Hand
-SUBCLASS: metadata.graphics.no.No
-SUBCLASS: metadata.graphics.others.HiddenImage
-SUBCLASS: metadata.graphics.others.StackType
-SUBCLASS: metadata.graphics.others.SuitRanking
-SUBCLASS: metadata.graphics.piece.Piece
-SUBCLASS: metadata.graphics.player.Player
-SUBCLASS: metadata.graphics.puzzle.AdversarialPuzzle
-SUBCLASS: metadata.graphics.puzzle.DrawHint
-SUBCLASS: metadata.graphics.puzzle.HintLocation
-SUBCLASS: metadata.graphics.region.Region
-SUBCLASS: metadata.graphics.show.Show
+SUBCLASS: metadata.ai.heuristics.transformations.HeuristicTransformation
+SUBCLASS: metadata.ai.heuristics.Heuristics
+SUBCLASS: metadata.ai.heuristics.terms.HeuristicTerm
+SUBCLASS: metadata.ai.heuristics.terms.SidesProximity
+SUBCLASS: metadata.ai.heuristics.terms.LineCompletionHeuristic
+SUBCLASS: metadata.ai.heuristics.terms.ComponentValues
+SUBCLASS: metadata.ai.heuristics.terms.PlayerSiteMapCount
+SUBCLASS: metadata.ai.heuristics.terms.OwnRegionsCount
+SUBCLASS: metadata.ai.heuristics.terms.MobilitySimple
+SUBCLASS: metadata.ai.heuristics.terms.CornerProximity
+SUBCLASS: metadata.ai.heuristics.terms.RegionProximity
+SUBCLASS: metadata.ai.heuristics.terms.Influence
+SUBCLASS: metadata.ai.heuristics.terms.CurrentMoverHeuristic
+SUBCLASS: metadata.ai.heuristics.terms.CentreProximity
+SUBCLASS: metadata.ai.heuristics.terms.Score
+SUBCLASS: metadata.ai.heuristics.terms.PlayerRegionsProximity
+SUBCLASS: metadata.ai.heuristics.terms.Material
+SUBCLASS: metadata.ai.heuristics.terms.NullHeuristic
+SUBCLASS: metadata.info.Info
+SUBCLASS: metadata.info.database.Version
+SUBCLASS: metadata.info.database.Date
+SUBCLASS: metadata.info.database.Credit
+SUBCLASS: metadata.info.database.Classification
+SUBCLASS: metadata.info.database.Aliases
+SUBCLASS: metadata.info.database.Source
+SUBCLASS: metadata.info.database.Publisher
+SUBCLASS: metadata.info.database.Author
+SUBCLASS: metadata.info.database.Origin
+SUBCLASS: metadata.info.database.Description
+SUBCLASS: metadata.info.database.Rules
+SUBCLASS: metadata.info.InfoItem
+SUBCLASS: metadata.graphics.util.ValueLocationType
+SUBCLASS: metadata.graphics.util.PuzzleDrawHintType
 SUBCLASS: metadata.graphics.util.BoardGraphicsType
-SUBCLASS: metadata.graphics.util.colour.Colour
-SUBCLASS: metadata.graphics.util.colour.UserColourType
-SUBCLASS: metadata.graphics.util.ComponentStyleType
 SUBCLASS: metadata.graphics.util.ContainerStyleType
 SUBCLASS: metadata.graphics.util.ControllerType
-SUBCLASS: metadata.graphics.util.CurveType
-SUBCLASS: metadata.graphics.util.EdgeType
-SUBCLASS: metadata.graphics.util.HoleType
 SUBCLASS: metadata.graphics.util.LineStyle
-SUBCLASS: metadata.graphics.util.PieceColourType
-SUBCLASS: metadata.graphics.util.PieceStackType
-SUBCLASS: metadata.graphics.util.PuzzleDrawHintType
+SUBCLASS: metadata.graphics.util.colour.Colour
+SUBCLASS: metadata.graphics.util.colour.UserColourType
 SUBCLASS: metadata.graphics.util.PuzzleHintLocationType
+SUBCLASS: metadata.graphics.util.HoleType
+SUBCLASS: metadata.graphics.util.CurveType
+SUBCLASS: metadata.graphics.util.ComponentStyleType
+SUBCLASS: metadata.graphics.util.EdgeType
+SUBCLASS: metadata.graphics.util.PieceStackType
 SUBCLASS: metadata.graphics.util.StackPropertyType
-SUBCLASS: metadata.graphics.util.ValueLocationType
+SUBCLASS: metadata.graphics.util.PieceColourType
 SUBCLASS: metadata.graphics.util.WhenScoreType
-SUBCLASS: metadata.info.database.Aliases
-SUBCLASS: metadata.info.database.Author
-SUBCLASS: metadata.info.database.Classification
-SUBCLASS: metadata.info.database.Credit
-SUBCLASS: metadata.info.database.Date
-SUBCLASS: metadata.info.database.Description
-SUBCLASS: metadata.info.database.Origin
-SUBCLASS: metadata.info.database.Publisher
-SUBCLASS: metadata.info.database.Rules
-SUBCLASS: metadata.info.database.Source
-SUBCLASS: metadata.info.database.Version
-SUBCLASS: metadata.info.Info
-SUBCLASS: metadata.info.InfoItem
+SUBCLASS: metadata.graphics.board.Board
+SUBCLASS: metadata.graphics.region.Region
+SUBCLASS: metadata.graphics.no.No
+SUBCLASS: metadata.graphics.GraphicsItem
+SUBCLASS: metadata.graphics.puzzle.AdversarialPuzzle
+SUBCLASS: metadata.graphics.puzzle.HintLocation
+SUBCLASS: metadata.graphics.puzzle.DrawHint
+SUBCLASS: metadata.graphics.others.HiddenImage
+SUBCLASS: metadata.graphics.others.SuitRanking
+SUBCLASS: metadata.graphics.others.StackType
+SUBCLASS: metadata.graphics.hand.Hand
+SUBCLASS: metadata.graphics.player.Player
+SUBCLASS: metadata.graphics.show.Show
+SUBCLASS: metadata.graphics.piece.Piece
 SUBCLASS: metadata.Metadata
 TYPE: metadata.ai.AIItem
 TYPE JAVADOC: General function hint for this game.Metadata containing hints for AI agents for this game.
-SUBCLASS: metadata.ai.features.Features
 SUBCLASS: metadata.ai.features.FeatureSet
-SUBCLASS: metadata.ai.heuristics.Heuristics
-SUBCLASS: metadata.ai.heuristics.terms.CentreProximity
-SUBCLASS: metadata.ai.heuristics.terms.ComponentValues
-SUBCLASS: metadata.ai.heuristics.terms.CornerProximity
-SUBCLASS: metadata.ai.heuristics.terms.CurrentMoverHeuristic
-SUBCLASS: metadata.ai.heuristics.terms.HeuristicTerm
-SUBCLASS: metadata.ai.heuristics.terms.Influence
-SUBCLASS: metadata.ai.heuristics.terms.LineCompletionHeuristic
-SUBCLASS: metadata.ai.heuristics.terms.Material
-SUBCLASS: metadata.ai.heuristics.terms.MobilitySimple
-SUBCLASS: metadata.ai.heuristics.terms.NullHeuristic
-SUBCLASS: metadata.ai.heuristics.terms.OwnRegionsCount
-SUBCLASS: metadata.ai.heuristics.terms.PlayerRegionsProximity
-SUBCLASS: metadata.ai.heuristics.terms.PlayerSiteMapCount
-SUBCLASS: metadata.ai.heuristics.terms.RegionProximity
-SUBCLASS: metadata.ai.heuristics.terms.Score
-SUBCLASS: metadata.ai.heuristics.terms.SidesProximity
+SUBCLASS: metadata.ai.features.Features
+SUBCLASS: metadata.ai.misc.BestAgent
 SUBCLASS: metadata.ai.heuristics.transformations.DivNumBoardSites
 SUBCLASS: metadata.ai.heuristics.transformations.DivNumInitPlacement
-SUBCLASS: metadata.ai.heuristics.transformations.HeuristicTransformation
 SUBCLASS: metadata.ai.heuristics.transformations.LogisticFunction
 SUBCLASS: metadata.ai.heuristics.transformations.Tanh
-SUBCLASS: metadata.ai.misc.BestAgent
+SUBCLASS: metadata.ai.heuristics.transformations.HeuristicTransformation
+SUBCLASS: metadata.ai.heuristics.Heuristics
+SUBCLASS: metadata.ai.heuristics.terms.HeuristicTerm
+SUBCLASS: metadata.ai.heuristics.terms.SidesProximity
+SUBCLASS: metadata.ai.heuristics.terms.LineCompletionHeuristic
+SUBCLASS: metadata.ai.heuristics.terms.ComponentValues
+SUBCLASS: metadata.ai.heuristics.terms.PlayerSiteMapCount
+SUBCLASS: metadata.ai.heuristics.terms.OwnRegionsCount
+SUBCLASS: metadata.ai.heuristics.terms.MobilitySimple
+SUBCLASS: metadata.ai.heuristics.terms.CornerProximity
+SUBCLASS: metadata.ai.heuristics.terms.RegionProximity
+SUBCLASS: metadata.ai.heuristics.terms.Influence
+SUBCLASS: metadata.ai.heuristics.terms.CurrentMoverHeuristic
+SUBCLASS: metadata.ai.heuristics.terms.CentreProximity
+SUBCLASS: metadata.ai.heuristics.terms.Score
+SUBCLASS: metadata.ai.heuristics.terms.PlayerRegionsProximity
+SUBCLASS: metadata.ai.heuristics.terms.Material
+SUBCLASS: metadata.ai.heuristics.terms.NullHeuristic
 TYPE: metadata.ai.Ai
 TYPE JAVADOC: Defines metadata that can help AIs in the Ludii app to play this game at a  stronger level.
 NEW CTOR
@@ -4667,7 +4667,7 @@ NEW CTOR
 (features [{<featureSet>}])
 PARAM JAVADOC: [{<featureSet>}]: A sequence of multiple feature sets (typically each applying to a different player).
 EXAMPLE: (features { (featureSet P1 { (pair "rel:to=<{}>:pat=<els=[-{}]>" 1.0) }) (featureSet P2 { (pair "rel:to=<{}>:pat=<els=[-{}]>" -1.0) }) })
-REMARKS: The basic format of these features is described in: Browne, C., Soemers, D. J. N. J., and Piette, E. (2019). ``Strategic features for general games.'' In Proceedings of the 2nd Workshop on Knowledge Extraction from Games (KEG) (pp. 70–75).
+REMARKS: The basic format of these features is described in: Browne, C., Soemers, D. J. N. J., and Piette, E. (2019). ``Strategic features for general games.'' In Proceedings of the 2nd Workshop on Knowledge Extraction from Games (KEG) (pp. 70â€“75).
 TYPE: metadata.ai.heuristics.Heuristics
 TYPE JAVADOC: Defines a collection of heuristics, which can be used by Alpha-Beta agent in  Ludii for their heuristics state evaluations.
 NEW CTOR
@@ -4712,21 +4712,21 @@ PARAM JAVADOC: [weight:<float>]: The weight for this term in a linear combinatio
 EXAMPLE: (currentMoverHeuristic weight:1.0)
 TYPE: metadata.ai.heuristics.terms.HeuristicTerm
 TYPE JAVADOC: Abstract class for heuristic terms. Every heuristic term is expected to implement  a function that outputs a score for a given game state and player, and every term  has a weight that is used for computing linear combinations of multiple terms.
-SUBCLASS: metadata.ai.heuristics.terms.CentreProximity
-SUBCLASS: metadata.ai.heuristics.terms.ComponentValues
-SUBCLASS: metadata.ai.heuristics.terms.CornerProximity
-SUBCLASS: metadata.ai.heuristics.terms.CurrentMoverHeuristic
-SUBCLASS: metadata.ai.heuristics.terms.Influence
-SUBCLASS: metadata.ai.heuristics.terms.LineCompletionHeuristic
-SUBCLASS: metadata.ai.heuristics.terms.Material
-SUBCLASS: metadata.ai.heuristics.terms.MobilitySimple
-SUBCLASS: metadata.ai.heuristics.terms.NullHeuristic
-SUBCLASS: metadata.ai.heuristics.terms.OwnRegionsCount
-SUBCLASS: metadata.ai.heuristics.terms.PlayerRegionsProximity
-SUBCLASS: metadata.ai.heuristics.terms.PlayerSiteMapCount
-SUBCLASS: metadata.ai.heuristics.terms.RegionProximity
-SUBCLASS: metadata.ai.heuristics.terms.Score
 SUBCLASS: metadata.ai.heuristics.terms.SidesProximity
+SUBCLASS: metadata.ai.heuristics.terms.LineCompletionHeuristic
+SUBCLASS: metadata.ai.heuristics.terms.ComponentValues
+SUBCLASS: metadata.ai.heuristics.terms.PlayerSiteMapCount
+SUBCLASS: metadata.ai.heuristics.terms.OwnRegionsCount
+SUBCLASS: metadata.ai.heuristics.terms.MobilitySimple
+SUBCLASS: metadata.ai.heuristics.terms.CornerProximity
+SUBCLASS: metadata.ai.heuristics.terms.RegionProximity
+SUBCLASS: metadata.ai.heuristics.terms.Influence
+SUBCLASS: metadata.ai.heuristics.terms.CurrentMoverHeuristic
+SUBCLASS: metadata.ai.heuristics.terms.CentreProximity
+SUBCLASS: metadata.ai.heuristics.terms.Score
+SUBCLASS: metadata.ai.heuristics.terms.PlayerRegionsProximity
+SUBCLASS: metadata.ai.heuristics.terms.Material
+SUBCLASS: metadata.ai.heuristics.terms.NullHeuristic
 TYPE: metadata.ai.heuristics.terms.Influence
 TYPE JAVADOC: Defines a heuristic term that multiplies its weight by the number  of moves with distinct "to" positions that a player has in a current game state,  divided by the number of playable positions that exist in the game.
 NEW CTOR
@@ -4858,32 +4858,32 @@ PARAM JAVADOC: <float>: The floating point value.
 EXAMPLE: (pair "Pawn" 1.0)
 TYPE: metadata.graphics.GraphicsItem
 TYPE JAVADOC: Metadata containing graphics hints.
-SUBCLASS: metadata.graphics.board.Board
-SUBCLASS: metadata.graphics.hand.Hand
-SUBCLASS: metadata.graphics.no.No
-SUBCLASS: metadata.graphics.others.HiddenImage
-SUBCLASS: metadata.graphics.others.StackType
-SUBCLASS: metadata.graphics.others.SuitRanking
-SUBCLASS: metadata.graphics.piece.Piece
-SUBCLASS: metadata.graphics.player.Player
-SUBCLASS: metadata.graphics.puzzle.AdversarialPuzzle
-SUBCLASS: metadata.graphics.puzzle.DrawHint
-SUBCLASS: metadata.graphics.puzzle.HintLocation
-SUBCLASS: metadata.graphics.region.Region
-SUBCLASS: metadata.graphics.show.Show
+SUBCLASS: metadata.graphics.util.ValueLocationType
+SUBCLASS: metadata.graphics.util.PuzzleDrawHintType
+SUBCLASS: metadata.graphics.util.ControllerType
+SUBCLASS: metadata.graphics.util.LineStyle
 SUBCLASS: metadata.graphics.util.colour.Colour
 SUBCLASS: metadata.graphics.util.colour.UserColourType
-SUBCLASS: metadata.graphics.util.ControllerType
-SUBCLASS: metadata.graphics.util.EdgeType
-SUBCLASS: metadata.graphics.util.HoleType
-SUBCLASS: metadata.graphics.util.LineStyle
-SUBCLASS: metadata.graphics.util.PieceColourType
-SUBCLASS: metadata.graphics.util.PieceStackType
-SUBCLASS: metadata.graphics.util.PuzzleDrawHintType
 SUBCLASS: metadata.graphics.util.PuzzleHintLocationType
+SUBCLASS: metadata.graphics.util.HoleType
+SUBCLASS: metadata.graphics.util.EdgeType
+SUBCLASS: metadata.graphics.util.PieceStackType
 SUBCLASS: metadata.graphics.util.StackPropertyType
-SUBCLASS: metadata.graphics.util.ValueLocationType
+SUBCLASS: metadata.graphics.util.PieceColourType
 SUBCLASS: metadata.graphics.util.WhenScoreType
+SUBCLASS: metadata.graphics.board.Board
+SUBCLASS: metadata.graphics.region.Region
+SUBCLASS: metadata.graphics.no.No
+SUBCLASS: metadata.graphics.puzzle.AdversarialPuzzle
+SUBCLASS: metadata.graphics.puzzle.HintLocation
+SUBCLASS: metadata.graphics.puzzle.DrawHint
+SUBCLASS: metadata.graphics.others.HiddenImage
+SUBCLASS: metadata.graphics.others.SuitRanking
+SUBCLASS: metadata.graphics.others.StackType
+SUBCLASS: metadata.graphics.hand.Hand
+SUBCLASS: metadata.graphics.player.Player
+SUBCLASS: metadata.graphics.show.Show
+SUBCLASS: metadata.graphics.piece.Piece
 TYPE: metadata.graphics.board.Board
 TYPE JAVADOC: Sets a graphic data to the board.
 NEW CTOR
@@ -5200,7 +5200,7 @@ PARAM JAVADOC: [<siteType>]: The GraphElementType for the specified sites [Verte
 PARAM JAVADOC: [<lineStyle>]: Line style [Thin].
 PARAM JAVADOC: [<colour>]: The colour of the line.
 PARAM JAVADOC: [scale:<float>]: The scale of the line.
-PARAM JAVADOC: [curve:{<float>}]: The control points for the line to create a Bézier curve with (4 values: x1, y1, x2, y2, between 0 and 1).
+PARAM JAVADOC: [curve:{<float>}]: The control points for the line to create a BÃ©zier curve with (4 values: x1, y1, x2, y2, between 0 and 1).
 PARAM JAVADOC: [<curveType>]: Type of curve [Spline].
 EXAMPLE: (show Line { {1 0} {2 4} })
 NEW CTOR
@@ -5493,17 +5493,17 @@ PARAM JAVADOC: {<infoItem>}: The info items of the game.
 EXAMPLE: (info { (description "Description of The game") (source "Source of the game") (version "1.0.0") (classification "board/space/territory") (origin "Origin of the game.") })
 TYPE: metadata.info.InfoItem
 TYPE JAVADOC: Metadata containing some specific type of information about the game (author, date, rules, etc.).
-SUBCLASS: metadata.info.database.Aliases
-SUBCLASS: metadata.info.database.Author
-SUBCLASS: metadata.info.database.Classification
-SUBCLASS: metadata.info.database.Credit
-SUBCLASS: metadata.info.database.Date
-SUBCLASS: metadata.info.database.Description
-SUBCLASS: metadata.info.database.Origin
-SUBCLASS: metadata.info.database.Publisher
-SUBCLASS: metadata.info.database.Rules
-SUBCLASS: metadata.info.database.Source
 SUBCLASS: metadata.info.database.Version
+SUBCLASS: metadata.info.database.Date
+SUBCLASS: metadata.info.database.Credit
+SUBCLASS: metadata.info.database.Classification
+SUBCLASS: metadata.info.database.Aliases
+SUBCLASS: metadata.info.database.Source
+SUBCLASS: metadata.info.database.Publisher
+SUBCLASS: metadata.info.database.Author
+SUBCLASS: metadata.info.database.Origin
+SUBCLASS: metadata.info.database.Description
+SUBCLASS: metadata.info.database.Rules
 TYPE: metadata.info.database.Aliases
 TYPE JAVADOC: Specifies a list of additional aliases for the game's name.
 NEW CTOR
@@ -5574,51 +5574,47 @@ NEW CTOR
 PARAM JAVADOC: <string>: Ludii version in String form.
 EXAMPLE: (version "1.0.0")
 REMARKS: The version format is (Major version).(Minor version).(Build number). For example, the first major version for public release is "1.0.0".
-DEFINE: AlquerqueBoard
-DEFINE JAVADOC: Defines a rectangular board with Alquerque-style alternating diagonals. 
-DEFINE EXAMPLE: ("AlquerqueBoard" 5 5)
-DEFINE: HoundsAndJackalsBoard
-DEFINE JAVADOC: Defines the standard 58 Holes or Hounds & Jackals board. This board defines tracks for two players, hardcoded in a particular shape. 
-DEFINE EXAMPLE: ("HoundsAndJackalsBoard")
 DEFINE: LascaBoard
 DEFINE JAVADOC: Defines the original Lasca board. 
 DEFINE EXAMPLE: ("LascaBoard")
+DEFINE: HoundsAndJackalsBoard
+DEFINE JAVADOC: Defines the standard 58 Holes or Hounds & Jackals board. This board defines tracks for two players, hardcoded in a particular shape. 
+DEFINE EXAMPLE: ("HoundsAndJackalsBoard")
+DEFINE: AlquerqueBoard
+DEFINE JAVADOC: Defines a rectangular board with Alquerque-style alternating diagonals. 
+DEFINE EXAMPLE: ("AlquerqueBoard" 5 5)
 DEFINE: HandEmpty
 DEFINE JAVADOC: Checks if all the sites in a specific hand are empty. #1 = The owner of the hand, can be a RoleType or the index of the owner. 
 DEFINE EXAMPLE: ("HandEmpty" Mover)
+DEFINE: NoSites
+DEFINE JAVADOC: Checks if a region has no sites. #1 = The region. 
+DEFINE EXAMPLE: ("NoSites" (sites Empty))
 DEFINE: IsInCheck
 DEFINE JAVADOC: Checks if a specific piece is threatened by any other enemy piece. #1 = The name of the piece (without the number). #2 = The roleType of the owner of the piece. #3 = The location where is the piece or The specific moves used to threat. This parameter is optional. If not specify the current location of the piece is used and all the legal moves are used. 
 DEFINE EXAMPLE: ("IsInCheck" "Osho" Next)
 DEFINE EXAMPLE: ("IsInCheck" "King" Mover at:(to))
-DEFINE: NewTurn
-DEFINE JAVADOC: Checks if this is new turn, i.e. the current move is not the previous mover. 
-DEFINE EXAMPLE: ("NewTurn")
-DEFINE: NoSites
-DEFINE JAVADOC: Checks if a region has no sites. #1 = The region. 
-DEFINE EXAMPLE: ("NoSites" (sites Empty))
 DEFINE: SameTurn
 DEFINE JAVADOC: Checks if the previous mover is the same player than the current mover, consequently this is the same turn. 
 DEFINE EXAMPLE: ("SameTurn")
+DEFINE: NewTurn
+DEFINE JAVADOC: Checks if this is new turn, i.e. the current move is not the previous mover. 
+DEFINE EXAMPLE: ("NewTurn")
 DEFINE: OccupiedNbors
 DEFINE JAVADOC: Returns the number of pieces owned by a player around a given site. #1 = The site to test around. #2 = The owner of the pieces to count. 
 DEFINE EXAMPLE: ("OccupiedNbors" (to) Mover)
 DEFINE: NoMoves
 DEFINE JAVADOC: Checks if the next player has no legal moves and apply a specific result to the next player. This ludemeplex can be used only in an ending condition. #1 = The result to apply. 
 DEFINE EXAMPLE: ("NoMoves" Loss)
-DEFINE: HopCapture
-DEFINE JAVADOC: Defines a hop move in all the adjacent directions over an enemy to an empty site. The enemy piece is removed. 
-DEFINE EXAMPLE: ("HopCapture")
-DEFINE: HopDiagonalCapture
-DEFINE JAVADOC: Defines a hop move in all the diagonal directions over an enemy to an empty site. The enemy piece is removed. 
-DEFINE EXAMPLE: ("HopDiagonalCapture")
-DEFINE: HopDiagonalSequenceCapture
-DEFINE JAVADOC: Defines a sequence of hop move in all the diagonal directions over an enemy to an empty site. The enemy pieces are removed. #1 = Maximum distance before the hop [0]. #2 = Maximum distance after the hop [0]. #3 = When to perform the capture (immediately or at the end of the turn) [immediately]. 
-DEFINE EXAMPLE: ("HopDiagonalSequenceCapture")
-DEFINE EXAMPLE: ("HopDiagonalSequenceCapture" before:(count Rows) after:(count Rows) at:EndOfTurn)
-DEFINE: HopDiagonalSequenceCaptureAgain
-DEFINE JAVADOC: Defines a sequence of hop move in all the diagonal directions over an enemy to an empty site from the last ``to'' location of the previous move. The enemy pieces are removed. #1 = Maximum distance before the hop [0]. #2 = Maximum distance after the hop [0]. #3 = When to perform the capture (immediately or at the end of the turn) [immediately]. 
-DEFINE EXAMPLE: ("HopDiagonalSequenceCaptureAgain")
-DEFINE EXAMPLE: ("HopDiagonalSequenceCaptureAgain" before:(count Rows) after:(count Rows) at:EndOfTurn)
+DEFINE: StepForwardToEmpty
+DEFINE JAVADOC: Defines a step move to the forward direction according to the facing direction of the piece in the 'from' location to an empty site. 
+DEFINE EXAMPLE: ("StepForwardToEmpty")
+DEFINE: HopRotationalCapture
+DEFINE JAVADOC: Defines a hop move in all the rotational directions over an enemy to an empty site. The enemy piece is removed. 
+DEFINE EXAMPLE: ("HopRotationalCapture")
+DEFINE: HopSequenceCapture
+DEFINE JAVADOC: Defines a sequence of hop move in all the adjacent directions over an enemy to an empty site. The enemy pieces are removed. #1 = Maximum distance before the hop [0]. #2 = Maximum distance after the hop [0]. #3 = When to perform the capture (immediately or at the end of the turn) [immediately]. 
+DEFINE EXAMPLE: ("HopSequenceCapture")
+DEFINE EXAMPLE: ("HopSequenceCapture" before:(count Rows) after:(count Rows) at:EndOfTurn)
 DEFINE: HopOrthogonalCapture
 DEFINE JAVADOC: Defines a hop move in all the orthogonal directions over an enemy to an empty site. The enemy piece is removed. 
 DEFINE EXAMPLE: ("HopOrthogonalCapture")
@@ -5626,60 +5622,64 @@ DEFINE: HopOrthogonalSequenceCapture
 DEFINE JAVADOC: Defines a sequence of hop move in all the orthogonal directions over an enemy to an empty site. The enemy pieces are removed. #1 = Maximum distance before the hop [0]. #2 = Maximum distance after the hop [0]. #3 = When to perform the capture (immediately or at the end of the turn) [immediately]. 
 DEFINE EXAMPLE: ("HopOrthogonalSequenceCapture")
 DEFINE EXAMPLE: ("HopOrthogonalSequenceCapture" before:(count Rows) after:(count Rows) at:EndOfTurn)
-DEFINE: HopOrthogonalSequenceCaptureAgain
-DEFINE JAVADOC: Defines a sequence of hop move in all the orthogonal directions over an enemy to an empty site from the last ``to'' location of the previous move. The enemy pieces are removed. #1 = Maximum distance before the hop [0]. #2 = Maximum distance after the hop [0]. #3 = When to perform the capture (immediately or at the end of the turn) [immediately]. 
-DEFINE EXAMPLE: ("HopOrthogonalSequenceCaptureAgain")
-DEFINE EXAMPLE: ("HopOrthogonalSequenceCaptureAgain" before:(count Rows) after:(count Rows) at:EndOfTurn)
-DEFINE: HopRotationalCapture
-DEFINE JAVADOC: Defines a hop move in all the rotational directions over an enemy to an empty site. The enemy piece is removed. 
-DEFINE EXAMPLE: ("HopRotationalCapture")
-DEFINE: HopRotationalSequenceCapture
-DEFINE JAVADOC: Defines a sequence of hop move in all the rotational directions over an enemy to an empty site. The enemy pieces are removed. #1 = Maximum distance before the hop [0]. #2 = Maximum distance after the hop [0]. #3 = When to perform the capture (immediately or at the end of the turn) [immediately]. 
-DEFINE EXAMPLE: ("HopRotationalSequenceCapture")
-DEFINE: HopRotationalSequenceCaptureAgain
-DEFINE JAVADOC: Defines a sequence of hop move in all the rotational directions over an enemy to an empty site from the last ``to'' location of the previous move. The enemy pieces are removed. #1 = Maximum distance before the hop [0]. #2 = Maximum distance after the hop [0]. #3 = When to perform the capture (immediately or at the end of the turn) [immediately]. 
-DEFINE EXAMPLE: ("HopRotationalSequenceCaptureAgain")
-DEFINE: HopSequenceCapture
-DEFINE JAVADOC: Defines a sequence of hop move in all the adjacent directions over an enemy to an empty site. The enemy pieces are removed. #1 = Maximum distance before the hop [0]. #2 = Maximum distance after the hop [0]. #3 = When to perform the capture (immediately or at the end of the turn) [immediately]. 
-DEFINE EXAMPLE: ("HopSequenceCapture")
-DEFINE EXAMPLE: ("HopSequenceCapture" before:(count Rows) after:(count Rows) at:EndOfTurn)
 DEFINE: HopSequenceCaptureAgain
 DEFINE JAVADOC: Defines a sequence of hop move in all the adjacent directions over an enemy to an empty site from the last ``to'' location of the previous move. The enemy pieces are removed. #1 = Maximum distance before the hop [0]. #2 = Maximum distance after the hop [0]. #3 = When to perform the capture (immediately or at the end of the turn) [immediately]. 
 DEFINE EXAMPLE: ("HopSequenceCaptureAgain")
 DEFINE EXAMPLE: ("HopSequenceCaptureAgain" before:(count Rows) after:(count Rows) at:EndOfTurn)
-DEFINE: StepBackwardToEmpty
-DEFINE JAVADOC: Defines a step move to the backward direction according to the facing direction of the piece in the 'from' location to an empty site. 
-DEFINE EXAMPLE: ("StepBackwardToEmpty")
-DEFINE: StepDiagonalToEmpty
-DEFINE JAVADOC: Defines a step move to all the diagonal directions to an empty site. 
-DEFINE EXAMPLE: ("StepDiagonalToEmpty")
+DEFINE: HopDiagonalSequenceCapture
+DEFINE JAVADOC: Defines a sequence of hop move in all the diagonal directions over an enemy to an empty site. The enemy pieces are removed. #1 = Maximum distance before the hop [0]. #2 = Maximum distance after the hop [0]. #3 = When to perform the capture (immediately or at the end of the turn) [immediately]. 
+DEFINE EXAMPLE: ("HopDiagonalSequenceCapture")
+DEFINE EXAMPLE: ("HopDiagonalSequenceCapture" before:(count Rows) after:(count Rows) at:EndOfTurn)
 DEFINE: StepForwardsToEmpty
 DEFINE JAVADOC: Defines a step move to all the forwards directions according to the facing direction of the piece in the ``from'' location to an empty site. 
 DEFINE EXAMPLE: ("StepForwardsToEmpty")
-DEFINE: StepForwardToEmpty
-DEFINE JAVADOC: Defines a step move to the forward direction according to the facing direction of the piece in the 'from' location to an empty site. 
-DEFINE EXAMPLE: ("StepForwardToEmpty")
 DEFINE: StepOrthogonalToEmpty
 DEFINE JAVADOC: Defines a step move to all the orthogonal directions to an empty site. 
 DEFINE EXAMPLE: ("StepOrthogonalToEmpty")
-DEFINE: StepRotationalToEmpty
-DEFINE JAVADOC: Defines a step move to all the rotational directions to an empty site. 
-DEFINE EXAMPLE: ("StepRotationalToEmpty")
+DEFINE: StepBackwardToEmpty
+DEFINE JAVADOC: Defines a step move to the backward direction according to the facing direction of the piece in the 'from' location to an empty site. 
+DEFINE EXAMPLE: ("StepBackwardToEmpty")
+DEFINE: HopCapture
+DEFINE JAVADOC: Defines a hop move in all the adjacent directions over an enemy to an empty site. The enemy piece is removed. 
+DEFINE EXAMPLE: ("HopCapture")
 DEFINE: StepToEmpty
 DEFINE JAVADOC: Defines a step move to all the adjacent directions to an empty site. 
 DEFINE EXAMPLE: ("StepToEmpty")
+DEFINE: HopOrthogonalSequenceCaptureAgain
+DEFINE JAVADOC: Defines a sequence of hop move in all the orthogonal directions over an enemy to an empty site from the last ``to'' location of the previous move. The enemy pieces are removed. #1 = Maximum distance before the hop [0]. #2 = Maximum distance after the hop [0]. #3 = When to perform the capture (immediately or at the end of the turn) [immediately]. 
+DEFINE EXAMPLE: ("HopOrthogonalSequenceCaptureAgain")
+DEFINE EXAMPLE: ("HopOrthogonalSequenceCaptureAgain" before:(count Rows) after:(count Rows) at:EndOfTurn)
+DEFINE: HopDiagonalCapture
+DEFINE JAVADOC: Defines a hop move in all the diagonal directions over an enemy to an empty site. The enemy piece is removed. 
+DEFINE EXAMPLE: ("HopDiagonalCapture")
+DEFINE: HopDiagonalSequenceCaptureAgain
+DEFINE JAVADOC: Defines a sequence of hop move in all the diagonal directions over an enemy to an empty site from the last ``to'' location of the previous move. The enemy pieces are removed. #1 = Maximum distance before the hop [0]. #2 = Maximum distance after the hop [0]. #3 = When to perform the capture (immediately or at the end of the turn) [immediately]. 
+DEFINE EXAMPLE: ("HopDiagonalSequenceCaptureAgain")
+DEFINE EXAMPLE: ("HopDiagonalSequenceCaptureAgain" before:(count Rows) after:(count Rows) at:EndOfTurn)
+DEFINE: HopRotationalSequenceCaptureAgain
+DEFINE JAVADOC: Defines a sequence of hop move in all the rotational directions over an enemy to an empty site from the last ``to'' location of the previous move. The enemy pieces are removed. #1 = Maximum distance before the hop [0]. #2 = Maximum distance after the hop [0]. #3 = When to perform the capture (immediately or at the end of the turn) [immediately]. 
+DEFINE EXAMPLE: ("HopRotationalSequenceCaptureAgain")
+DEFINE: HopRotationalSequenceCapture
+DEFINE JAVADOC: Defines a sequence of hop move in all the rotational directions over an enemy to an empty site. The enemy pieces are removed. #1 = Maximum distance before the hop [0]. #2 = Maximum distance after the hop [0]. #3 = When to perform the capture (immediately or at the end of the turn) [immediately]. 
+DEFINE EXAMPLE: ("HopRotationalSequenceCapture")
+DEFINE: StepRotationalToEmpty
+DEFINE JAVADOC: Defines a step move to all the rotational directions to an empty site. 
+DEFINE EXAMPLE: ("StepRotationalToEmpty")
+DEFINE: StepDiagonalToEmpty
+DEFINE JAVADOC: Defines a step move to all the diagonal directions to an empty site. 
+DEFINE EXAMPLE: ("StepDiagonalToEmpty")
 DEFINE: DominoWalk
 DEFINE JAVADOC: Defines a graphics turtle walk to build a domino as a large piece. 
 DEFINE EXAMPLE: ("DominoWalk")
-DEFINE: GiraffeWalk
-DEFINE JAVADOC: Defines a graphics turtle walk to get the locations where can move a Chess giraffe. 
-DEFINE EXAMPLE: ("GiraffeWalk")
-DEFINE: KnightWalk
-DEFINE JAVADOC: Defines a graphics turtle walk to get the locations where can move a Chess knight. 
-DEFINE EXAMPLE: ("KnightWalk")
-DEFINE: LWalk
-DEFINE JAVADOC: Defines a graphics turtle walk to build a large L piece. 
-DEFINE EXAMPLE: ("LWalk")
 DEFINE: TWalk
 DEFINE JAVADOC: Defines a graphics turtle walk to build a large T piece. 
 DEFINE EXAMPLE: ("TWalk")
+DEFINE: LWalk
+DEFINE JAVADOC: Defines a graphics turtle walk to build a large L piece. 
+DEFINE EXAMPLE: ("LWalk")
+DEFINE: KnightWalk
+DEFINE JAVADOC: Defines a graphics turtle walk to get the locations where can move a Chess knight. 
+DEFINE EXAMPLE: ("KnightWalk")
+DEFINE: GiraffeWalk
+DEFINE JAVADOC: Defines a graphics turtle walk to get the locations where can move a Chess giraffe. 
+DEFINE EXAMPLE: ("GiraffeWalk")

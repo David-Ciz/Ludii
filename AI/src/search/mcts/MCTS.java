@@ -467,8 +467,10 @@ public class MCTS extends ExpertPolicy
 	)
 	{
 		final long startTime = System.currentTimeMillis();
-		long stopTime = (maxSeconds > 0.0) ? startTime + (long) (maxSeconds * 1000) : Long.MAX_VALUE;
-		final int maxIts = (maxIterations >= 0) ? maxIterations : Integer.MAX_VALUE;
+		//long stopTime = (maxSeconds > 0.0) ? startTime + (long) (maxSeconds * 1000) : Long.MAX_VALUE;
+		//final int maxIts = (maxIterations >= 0) ? maxIterations : Integer.MAX_VALUE;
+		long stopTime = Long.MAX_VALUE;
+		final int maxIts = 100;
 				
 		int numIterations = 0;
 		
@@ -626,7 +628,6 @@ public class MCTS extends ExpertPolicy
 			
 			++numIterations;
 		}
-		
 		lastNumMctsIterations = numIterations;
 		
 		final Move returnMove = finalMoveSelectionStrategy.selectMove(rootNode);
@@ -695,6 +696,7 @@ public class MCTS extends ExpertPolicy
 		}
 		
 		//System.out.println(numIterations + " MCTS iterations");
+		
 		return returnMove;
 	}
 	

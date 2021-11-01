@@ -37,6 +37,8 @@ import other.trial.Trial;
 import utils.AIFactory;
 import utils.DBGameInfo;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Functions used when evaluating games.
  * 
@@ -74,13 +76,22 @@ public class EvalGames
 		outputString = outputString.substring(0, outputString.length()-1) + "\n";
 		
 		//final String[] choices = FileHandling.listGames();
-		String[] choices = {"/lud/board/space/connection/Hex.lud",
-							"/lud/math/hand/Rock-Paper-Scissors.lud"};
+		//String[] choices = {"/lud/board/space/connection/Hex.lud","/lud/math/hand/Rock-Paper-Scissors.lud"};
+		String[] choices = {"/lud/board/space/connection/Hex.lud"};
+		//String[] choices = {"/lud/board/war/leaping/diagonal/English Draughts.lud"};
+		//String[] choices = {"/lud/board/war/leaping/direction/linear/Fanorona.lud"};
+		//String[] choices = {"/lud/board/sow/two_rows/Awari.lud"};
+		//"/lud/board/space/connection/Hex.lud",
 		
-		String[] agents = {"Random", "MC-GRAVE", "Ludii AI", "UCT"};
-		List<String> optionalRules = Arrays.asList("Swap Rules/Off", "Board Size/3x3");
+		//String[] agents = {"Random", "MC-GRAVE", "Ludii AI", "UCT"};
+		//String[] agents = {"MC-GRAVE", "Ludii AI", "UCT"};
+		String[] agents = {"MC-GRAVE"};
+
+		//List<String> optionalRules = Arrays.asList("Swap Rules/On");
+		List<String> optionalRules = Arrays.asList("");
 		for (final String s : choices)
 		{
+			long start = System.nanoTime();
 			if (!FileHandling.shouldIgnoreLudEvaluation(s))
 			{
 				System.out.println("\n" + s);
@@ -112,6 +123,8 @@ public class EvalGames
 					}
 				}
 			}
+			long end = System.nanoTime();
+			System.out.printf("That took: %d ms.%n", TimeUnit.NANOSECONDS.toMillis(end - start));
 		}
 		
 		try (final BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath, false)))
@@ -396,7 +409,6 @@ public class EvalGames
 			final double weight = weights.get(m).doubleValue();
 			analysisPanelString += metric.name() + ": " + df.format(score) + " (weight: " + weight + ")\n";
 			finalScore += score * weight;
-			
 			csvOutputString += score + ",";
 		}
 		
@@ -412,7 +424,9 @@ public class EvalGames
 			System.out.println(analysisPanelString);
 		}
 
-		return csvOutputString.substring(0, csvOutputString.length()-1) + "\n";
+		//return csvOutputString.substring(0, csvOutputString.length()-1) + "\n";
+		return csvOutputString.substring(0, csvOutputString.length()-1) + "\n" + analysisPanelString + "\n";
+		
 	}
 	
 	//-------------------------------------------------------------------------
@@ -423,7 +437,7 @@ public class EvalGames
 	public static void main(final String[] args)
 	{
 		// Define options for arg parser
-		final CommandLineArgParse argParse = 
+		final CommandLineArgParse argParse = 															
 			new CommandLineArgParse
 			(
 				true,
@@ -433,7 +447,7 @@ public class EvalGames
 		argParse.addOption(new ArgOption()
 				.withNames("--numTrials")
 				.help("Number of trials to run for each game.")
-				.withDefault(Integer.valueOf(1000))
+				.withDefault(Integer.valueOf(1))
 				.withNumVals(1)
 				.withType(OptionTypes.Int));
 		argParse.addOption(new ArgOption()
